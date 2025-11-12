@@ -1,80 +1,71 @@
+// Aguarda o conteúdo da página ser totalmente carregado
 document.addEventListener("DOMContentLoaded", () => {
-  const chatContainer = document.getElementById('chat-container');
-  
-  if (chatContainer) {
-    const chat = document.getElementById("chat");
-    const userInput = document.getElementById("entrada");
-    const sendButton = document.querySelector("#input-container button");
+  const chatForm = document.getElementById("chat-form");
+  const chatInput = document.getElementById("chat-input");
+  const chatMessages = document.getElementById("chat-messages");
 
-    // Função para adicionar mensagens à interface
-    const adicionarMensagem = (remetente, texto, classe) => {
-      const msgContainer = document.createElement("div");
-      const msgBubble = document.createElement("div");
-      
-      msgContainer.className = "msg-container " + classe;
-      msgBubble.className = "msg";
-      msgBubble.textContent = texto;
+  // ATUALIZADO: URL aponta para a porta 3000 e a rota /chatAmina
+  const BACKEND_URL = "http://localhost:3000/chatAmina";
 
-      msgContainer.appendChild(msgBubble);
-      chat.appendChild(msgContainer);
-      chat.scrollTop = chat.scrollHeight;
-    };
+  // Adiciona um listener para o envio do formulário
+  chatForm.addEventListener("submit", async (event) => {
+    event.preventDefault(); // Impede o recarregamento da página
 
-    // Função da Amina para responder (SIMULADA)
-    const responder = (texto) => {
-      const typing = document.createElement("div");
-      typing.className = "msg-container amina";
-      typing.innerHTML = `<div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>`;
-      chat.appendChild(typing);
-      chat.scrollTop = chat.scrollHeight;
+    const messageText = chatInput.value.trim();
+    if (!messageText) {
+      return; // Não envia mensagens vazias
+    }
 
-      let resposta = "Não entendi muito bem, mas estou aqui para te ouvir. Pode me explicar de outra forma?";
-      const t = texto.toLowerCase();
+    // 1. Exibe a mensagem do usuário na tela
+    addMessage(messageText, "user");
 
-      if (t.includes("oi") || t.includes("olá")) {
-        resposta = "Oi! Eu sou a Amina. Estou aqui para apoiar você. Como está se sentindo?";
-      } else if (t.includes("triste") || t.includes("sozinha") || t.includes("mal")) {
-        resposta = "Sinto muito que esteja passando por isso. Lembre-se que você é forte. Quer conversar mais sobre o que está te deixando assim?";
-      } else if (t.includes("feliz") || t.includes("bem")) {
-        resposta = "Fico muito feliz por você! Compartilhar bons momentos também é muito importante. O que te deixou feliz hoje?";
-      } else if (t.includes("ajuda") || t.includes("preciso de ajuda")) {
-        resposta = "Claro! Você pode me contar o que está acontecendo e eu vou te apoiar da melhor forma. Se for uma emergência, ligue para 190 ou 180.";
-      } else if (t.includes("obrigada") || t.includes("obrigado")) {
-        resposta = "De nada! Estarei sempre aqui quando precisar conversar. Se cuida!";
-      } else if (t.includes("sim") || t.includes("pode ser")) {
-        resposta = "Estou aqui para te ouvir!";
-      } else if (t.includes("tchau") || t.includes("até mais")) {
-        resposta = "Tudo bem. Se cuida, você não está sozinha. Estarei aqui sempre que precisar conversar.";
+    // Limpa o input
+    chatInput.value = "";
+
+    try {
+      // 2. Envia a mensagem para o backend
+      const response = await fetch(BACKEND_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // ATUALIZADO: Envia a chave "message", como o novo server.js espera
+        body: JSON.stringify({ message: messageText }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Erro ao conectar com o servidor.");
       }
 
-      setTimeout(() => {
-        typing.remove();
-        adicionarMensagem("Amina", resposta, "amina");
-      }, 1500);
-    };
+      const data = await response.json();
 
-    // Função para enviar a mensagem do usuário
-    const enviar = () => {
-      const texto = userInput.value;
-      if (texto.trim() === "") return;
-      
-      adicionarMensagem("Você", texto, "user");
-      responder(texto);
-      userInput.value = "";
-      userInput.focus();
-    };
+      // 3. ATUALIZADO: Recebe a chave "reply", como o novo server.js envia
+      addMessage(data.reply, "ai");
+    } catch (error) {
+      console.error("Erro na requisição fetch:", error);
+      // 4. Exibe uma mensagem de erro no chat
+      addMessage(
+        `Desculpe, não consegui me conectar. (Erro: ${error.message})`,
+        "ai-error"
+      );
+    }
+  });
 
-    // Adiciona os eventos
-    sendButton.addEventListener('click', enviar);
-    userInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        enviar();
-      }
-    });
+  /**
+   * Função auxiliar para adicionar mensagens ao contêiner do chat
+   * @param {string} text - O texto da mensagem
+   * @param {('user' | 'ai' | 'ai-error')} type - O tipo de mensagem (para estilização)
+   */
+  function addMessage(text, type) {
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("chat-message", `message-${type}`);
 
-    // Mensagem inicial da Amina
-    setTimeout(() => {
-      adicionarMensagem("Amina", "Olá! Eu sou a Amina, sua amiga virtual. Estou aqui para conversar e apoiar você. Como você está hoje?", "amina");
-    }, 500);
+    messageElement.innerText = text;
+
+    chatMessages.appendChild(messageElement);
+
+    // Rola para a mensagem mais recente
+    chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 });

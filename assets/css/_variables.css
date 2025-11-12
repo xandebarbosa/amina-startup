@@ -1,0 +1,47 @@
+:root {
+  /* Paleta de Cores Principal */
+  --cor-primaria: #7E2A53;
+  --cor-primaria-hover: #621F41;
+  --cor-secundaria: #F5E6F0;
+  --cor-escura: #2D0A24;
+  --cor-clara: #FFFFFF;
+  --cor-accent: #A855A0;
+  --cor-accent-light: #D8A5D3;
+  
+  /* Cores Neutras */
+  --cor-neutra-clara: #FAFAFA;
+  --cor-neutra-media: #E8E8E8;
+  --cor-borda: #D4C4D9;
+  --cor-texto-secundario: #5A4359;
+  
+  /* Sombras Profissionais */
+  --sombra-leve: 0 2px 8px rgba(126, 42, 83, 0.08);
+  --sombra-media: 0 4px 16px rgba(126, 42, 83, 0.12);
+  --sombra-forte: 0 8px 24px rgba(126, 42, 83, 0.16);
+  
+  /* Transições Suaves */
+  --transicao-rapida: 0.2s ease;
+  --transicao-media: 0.3s ease;
+  --transicao-lenta: 0.5s ease;
+  
+  /* Tipografia */
+  --tamanho-base-fonte: 1rem;
+  --fonte-principal: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --peso-normal: 400;
+  --peso-medio: 500;
+  --peso-semi-bold: 600;
+  --peso-bold: 700;
+  
+  /* Espaçamentos */
+  --espacamento-xs: 0.5rem;
+  --espacamento-sm: 1rem;
+  --espacamento-md: 1.5rem;
+  --espacamento-lg: 2rem;
+  --espacamento-xl: 3rem;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 50%;
+}

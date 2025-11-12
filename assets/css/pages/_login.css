@@ -1,0 +1,127 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--espacamento-md);
+  box-sizing: border-box;
+}
+
+.login-page main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.login-container {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.98);
+  padding: var(--espacamento-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sombra-forte);
+  border: 1px solid rgba(126, 42, 83, 0.1);
+  animation: fadeIn 0.6s ease-out;
+}
+
+.login-container .logo {
+  margin-bottom: var(--espacamento-md);
+  width: 100px;
+  height: 100px;
+  transition: transform 0.5s ease;
+}
+
+.login-container .logo:hover {
+  transform: rotate(360deg) scale(1.1);
+}
+
+.login-container h2 {
+  color: var(--cor-primaria);
+  font-size: 1.8rem;
+  font-weight: var(--peso-bold);
+  margin-bottom: var(--espacamento-md);
+  position: relative;
+  padding-bottom: var(--espacamento-sm);
+}
+
+.login-container h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cor-primaria), var(--cor-accent));
+  border-radius: 2px;
+}
+
+/* Seção de Credenciais (inicialmente oculta) */
+#cred-section {
+  display: none;
+}
+
+/* Resultado da Verificação */
+#cred-result {
+  margin-top: var(--espacamento-sm);
+  padding: var(--espacamento-sm);
+  border-radius: var(--radius-sm);
+  font-weight: var(--peso-medio);
+  text-align: center;
+}
+
+/* Estados de Feedback */
+.login-container .form-group input:focus + label,
+.login-container .form-group select:focus + label {
+  color: var(--cor-primaria);
+}
+
+/* Animações de Transição */
+.login-container .form {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Link Extra (caso adicione "Esqueceu a senha?" etc) */
+.login-container a:not(.logo) {
+  color: var(--cor-primaria);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color var(--transicao-rapida);
+  display: inline-block;
+  margin-top: var(--espacamento-sm);
+}
+
+.login-container a:not(.logo):hover {
+  color: var(--cor-accent);
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .login-container {
+    padding: var(--espacamento-md);
+  }
+  
+  .login-container h2 {
+    font-size: 1.5rem;
+  }
+  
+  .login-container .logo {
+    width: 80px;
+    height: 80px;
+  }
+}

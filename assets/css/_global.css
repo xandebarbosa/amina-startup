@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fonte-principal);
+  background: linear-gradient(135deg, #f8d7e3 0%, #ffe4f0 25%, #f9c9d7 50%, #f2e9ec 75%, #ffd9ea 100%);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+  color: var(--cor-escura);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-size: var(--tamanho-base-fonte);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animação de Fundo Suave */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Tipografia Aprimorada */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--peso-semi-bold);
+  line-height: 1.3;
+  color: var(--cor-escura);
+  margin-bottom: var(--espacamento-sm);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+p {
+  margin-bottom: var(--espacamento-sm);
+  color: var(--cor-texto-secundario);
+}
+
+a {
+  color: var(--cor-primaria);
+  text-decoration: none;
+  transition: color var(--transicao-rapida);
+}
+
+a:hover {
+  color: var(--cor-primaria-hover);
+}
+
+/* Listas Estilizadas */
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  padding: var(--espacamento-xs) 0;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+ul li::before {
+  content: "•";
+  color: var(--cor-accent);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Scrollbar Personalizada */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cor-secundaria);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cor-primaria);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cor-primaria-hover);
+}
+
+/* Seleção de Texto */
+::selection {
+  background-color: var(--cor-accent-light);
+  color: var(--cor-escura);
+}
+
+/* Animações de Entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Foco Acessível */
+*:focus-visible {
+  outline: 3px solid var(--cor-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}

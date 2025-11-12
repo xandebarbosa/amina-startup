@@ -1,0 +1,257 @@
+/*
+ * Seção: Layout específico do Mapa (mapa.html)
+ * Este arquivo deve ser importado em seu assets/css/main.css
+ */
+.map-layout {
+    display: flex;
+    flex-direction: row;
+    flex: 1; 
+    position: relative;
+    /* ESSENCIAL: Garante que o main ocupa todo o espaço vertical restante */
+    //min-height: calc(100vh - var(--altura-do-header, 150px)); 
+    width: 100%;
+    margin: 0;
+    
+    /* 1. Remove o limite de 1400px do arquivo _base_page.css */
+    max-width: 100%;
+    /* 2. Remove o padding do arquivo _base_page.css */
+    padding: 0;
+    /* 3. Garante que o menu escondido não crie uma barra de rolagem */
+    overflow-x: hidden;
+}
+
+#map {
+    width: auto;
+    flex-grow: 1;
+    transition: margin-left 0.3s ease;
+    min-height: 500px;
+    
+    margin-left: 300px; 
+    box-sizing: border-box; /* Garante que o mapa não ultrapasse a tela */
+    
+}
+
+/* SIDEBAR (MENU LATERAL) */
+.sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    background: var(--cor-neutra-clara); 
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+    color: var(--cor-escura);
+}
+.sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+/* BOTÃO DE EXPANSÃO/CONTRAÇÃO */
+.toggle-btn {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 8px;
+    width: 35px;
+    height: 35px;
+    background: var(--cor-primaria);
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    line-height: 35px;
+    font-weight: bold;
+    color: var(--cor-clara);
+    transition: background 0.3s, transform 0.2s;
+    border: none;
+    outline: none;
+}
+.toggle-btn:hover, .toggle-btn:focus {
+    background: var(--cor-hover);
+    transform: scale(1.05);
+}
+
+/* BOTÃO DE AÇÃO (BUSCAR DELEGACIAS) */
+.btn {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: var(--cor-primaria);
+    border: none;
+    color: var(--cor-clara);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.btn:hover, .btn:focus {
+    background: var(--cor-hover);
+    transform: translateY(-2px);
+}
+.btn:disabled {
+    background: var(--cor-borda);
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ITENS DA LISTA */
+.list-item {
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: var(--cor-clara);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 3px solid transparent;
+    color: var(--cor-escura);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.list-item:hover, .list-item:focus {
+    background: var(--cor-neutra-clara);
+    transform: translateX(3px);
+}
+.list-item.active {
+    background: var(--cor-secundaria);
+    border-left-color: var(--cor-primaria);
+    transform: translateX(3px);
+}
+.distance {
+    font-size: 12px;
+    color: var(--cor-primaria);
+    font-weight: bold;
+}
+
+/* CABEÇALHO DO SIDEBAR */
+.header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.header .logo { 
+    width: 32px;
+    height: 32px;
+    background: var(--cor-primaria);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--cor-clara);
+}
+.title {
+    color: var(--cor-primaria);
+    margin: 0;
+    font-size: 1.4rem;
+}
+.subtitle {
+    font-size: 0.9rem;
+    color: var(--cor-escura);
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+/*
+ * Seção: STATUS DE MENSAGENS, LOADING E NO-RESULTS
+ */
+#status {
+    margin-top: 15px;
+    font-size: 14px;
+    color: var(--cor-escura); 
+    line-height: 1.4;
+    padding: 10px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.05); 
+}
+
+.status-loading {
+    color: var(--cor-primaria); 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-error {
+    color: #cc3333; 
+    background: rgba(204, 51, 51, 0.1);
+}
+
+.status-success {
+    color: #33cc33; 
+    background: rgba(51, 204, 51, 0.1);
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--cor-primaria);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.no-results {
+    text-align: center;
+    padding: 20px;
+    color: var(--cor-escura);
+    font-style: italic;
+}
+
+
+/* Responsividade do Mapa */
+@media (max-width: 480px) {
+    .map-layout {
+        position: relative; /* Remove o 'absolute' anterior */
+        display: flex;
+        flex-direction: column; /* Empilha o menu e o mapa */
+        padding: 0; /* Remove qualquer padding da página base */
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        min-height: 0;
+    }
+    .sidebar {
+        position: relative; 
+        width: 100%;
+        transform: none !important;
+    }
+    /* 3. Oculta o botão de abrir/fechar, pois o menu está sempre aberto */
+    .toggle-btn {
+     display: none;
+    }
+
+    /* 4. Remove os efeitos de "blur" do mapa */
+    .sidebar:not(.collapsed) ~ #map {
+      pointer-events: auto;
+      filter: none;
+    }
+
+    /* 5. Define o mapa para aparecer abaixo do menu */
+     #map {
+       width: 100%;
+       //height: 70vh; /* Altura de 70% da tela (ajuste se precisar) */
+       min-height: 500px; /* Altura mínima para garantir a visualização */
+       margin-left: 0; /* Remove margens do layout desktop */       
+    }  
+
+    /* 6. Regra de colapso não é mais necessária no mobile */
+    .sidebar.collapsed + #map {
+      margin-left: 0;
+    }
+}

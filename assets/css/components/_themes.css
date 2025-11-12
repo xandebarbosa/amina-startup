@@ -1,0 +1,60 @@
+/* --- TEMA ESCURO --- */
+body.theme-dark {
+  /* Inverte as cores primárias e claras */
+  --cor-primaria: #ECDDED; /* Rosa claro vira a "primária" (para textos/destaques) */
+  --cor-secundaria: #46103A; /* Roxo escuro vira o "fundo" */
+  --cor-escura: #FFFFFF; /* Branco vira a cor de texto principal */
+  --cor-clara: #22081C; /* Um fundo quase preto para headers/footers */
+  --cor-hover: #8A71A2; /* Mantém o lavanda */
+  --cor-neutra-clara: #331A2D; /* Fundo escuro para cards */
+  --cor-borda: #5a3a55; 
+  
+  background: linear-gradient(270deg, #2a0a20, #3d1031, #1e0717, #1b0615);
+  background-size: 800% 800%;
+  animation: gradientBG 12s ease infinite;
+}
+
+body.theme-dark .site-header,
+body.theme-dark .site-footer {
+  background-color: var(--cor-clara); 
+  color: var(--cor-primaria); 
+}
+
+body.theme-dark .logo {
+  border-color: var(--cor-primaria); 
+}
+
+body.theme-dark .main-nav a {
+  color: var(--cor-escura); 
+}
+body.theme-dark .main-nav a:hover {
+  background: var(--cor-primaria); 
+  color: var(--cor-clara); 
+}
+
+body.theme-dark .card {
+    background: var(--cor-neutra-clara); 
+    color: var(--cor-clara); 
+}
+body.theme-dark .card h3 {
+    color: var(--cor-clara); 
+}
+
+body.theme-dark .main-nav a:hover {
+  background: var(--cor-clara); 
+  color: var(--cor-hover); 
+}
+
+body.theme-dark .content-section {
+  background: var(--cor-neutra-clara);
+  
+  border-color: var(--cor-borda);
+}
+
+body.theme-dark .content-section p {
+  color: var(--cor-primaria); 
+}
+
+body.theme-dark .content-section h3 {
+  color: var(--cor-hover) !important; 
+}

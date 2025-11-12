@@ -1,0 +1,55 @@
+.site-footer {
+  background: linear-gradient(135deg, var(--cor-primaria) 0%, #621F41 100%);
+  color: var(--cor-clara);
+  padding: var(--espacamento-lg);
+  text-align: center;
+  margin-top: auto;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    var(--cor-accent) 0%, 
+    var(--cor-accent-light) 50%, 
+    var(--cor-accent) 100%
+  );
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: var(--peso-normal);
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.5px;
+}
+
+/* Links no Footer (se adicionar no futuro) */
+.site-footer a {
+  color: var(--cor-clara);
+  text-decoration: none;
+  margin: 0 var(--espacamento-xs);
+  transition: color var(--transicao-rapida);
+}
+
+.site-footer a:hover {
+  color: var(--cor-accent-light);
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    /* Diminui o padding de 'lg' (2rem) para 'md' (1.5rem) */
+    padding: var(--espacamento-md);
+  }
+  
+  .site-footer p {
+    /* Diminui um pouco a fonte no mobile */
+    font-size: 0.875rem;
+  }
+}

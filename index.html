@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Amina</title>
+  <link rel="stylesheet" href="./assets/css/main.css">
+  </head>
+<body class="login-page">
+
+  <main>
+    <section id="login-section" class="content-section login-container">
+      <a href="home.html">
+        <img src="./assets/images/logo.png" alt="Logo da Startup Amina" class="logo" style="margin-bottom: 1rem;">
+      </a>
+      <h2>Acesso à Plataforma</h2>
+      <form id="login-form" class="form">
+        <div class="form-group">
+          <label for="username">Usuário (opcional)</label>
+          <input type="text" id="username" placeholder="Digite seu usuário">
+        </div>
+        <div class="form-group">
+          <label for="password">Senha (opcional)</label>
+          <input type="password" id="password" placeholder="Digite sua senha">
+        </div>
+        <div class="form-group">
+          <label for="role">Selecione seu perfil de acesso</label>
+          <select id="role" required>
+            <option value="">-- Selecione uma opção --</option>
+            <option value="usuario">Sou uma usuária buscando apoio</option>
+            <option value="saude">Sou da área de Saúde Mental</option>
+            <option value="juridico">Sou da área Jurídica</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit">Entrar</button>
+      </form>
+    </section>
+
+    <section id="cred-section" class="content-section login-container">
+       <a href="home.html">
+        <img src="./assets/images/logo.png" alt="Logo da Startup Amina" class="logo" style="margin-bottom: 1rem;">
+      </a>
+      <h2>Verificação de Credencial</h2>
+      <form id="cred-form" class="form">
+        <div class="form-group">
+          <label for="cred-type">Tipo de Profissional</label>
+          <input type="text" id="cred-type" readonly>
+        </div>
+        <div class="form-group">
+          <label for="credential">Número da Credencial</label>
+          <input type="text" id="credential" placeholder="Ex: CRM-12345 ou OAB-67890" required>
+        </div>
+        <button type="submit" class="btn-submit">Verificar</button>
+        <p id="cred-result"></p>
+      </form>
+    </section>
+  </main>
+  
+  <script src="./assets/js/login.js"></script>
+</body>
+</html>
